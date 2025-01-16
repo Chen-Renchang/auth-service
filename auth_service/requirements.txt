@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-dotenv
+sqlalchemy
+psycopg2-binary
+passlib
+python-jose[cryptography]
+redis
+pydantic
+python-dotenv
+pydantic-settings
+python-multipart
