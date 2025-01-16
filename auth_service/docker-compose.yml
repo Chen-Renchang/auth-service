@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dbname
+    volumes:
+      - ./app/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:6.2
+    ports:
+      - "6379:6379"
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=dbname
+      - DB_USER=user
+      - DB_PASSWORD=password
+    depends_on:
+      - db
+      - redis
